@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIC18 and dsPIC33 Programming Guide</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c5aa0;
+            font-size: 28px;
+            margin: 0;
+            font-weight: bold;
+        }
+        
+        .header p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .case-section {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            background: #f9f9f9;
+        }
+        
+        .case-title {
+            background: #2c5aa0;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: -20px -20px 20px -20px;
+        }
+        
+        .requirements {
+            background: #e8f4f8;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .requirements h3 {
+            color: #1976d2;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+        
+        .steps {
+            margin: 20px 0;
+        }
+        
+        .step {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            background: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .step-title {
+            color: #2c5aa0;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .code-path {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 5px 0;
+            overflow-x: auto;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #fdcb6e;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+            color: #d63031;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        .summary-table th {
+            background: #2c5aa0;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .summary-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .summary-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .summary-table tr:hover {
+            background: #f0f8ff;
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .success {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        .icon {
+            margin-right: 5px;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 15mm;
+            }
+            
+            .case-section {
+                page-break-inside: avoid;
+            }
+            
+            .step {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PIC18 and dsPIC33 Programming Guide</h1>
+        <p>Using PICkit 3 Programmer - Standalone and MPLAB X IDE</p>
+        <p>Complete Step-by-Step Instructions</p>
+    </div>
+
+    <div class="case-section">
+        <div class="case-title">
+            <span class="icon">✅</span> CASE 1: Programming PIC18 Using PICkit 3 Standalone Software
+        </div>
+        
+        <p>Since MPLAB X IDE v6.20 does not support older PIC18 devices directly, we use PICkit 3 Programmer Application (Standalone v3.10 or similar) for PIC18 devices.</p>
+        
+        <div class="requirements">
+            <h3><span class="icon">🧰</span> Requirements:</h3>
+            <ul>
+                <li>PICkit 3 Programmer Standalone App (not MPLAB X IPE)</li>
+                <li>HEX file compiled from MPLAB X IDE or MPLAB 8</li>
+                <li>Correct connection between PICkit 3 and the target board</li>
+            </ul>
+        </div>
+        
+        <div class="steps">
+            <h3><span class="icon">🔧</span> Step-by-Step for PIC18:</h3>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">1</span>Create the .hex file
+                </div>
+                <ul>
+                    <li>Open MPLAB X IDE (any supported version like v5.x)</li>
+                    <li>Create your project for the PIC18 device</li>
+                    <li>Build the project (Ctrl + F11) and locate the .hex file in:</li>
+                </ul>
+                <div class="code-path">&lt;Project Directory&gt;\dist\default\production\&lt;ProjectName&gt;.hex</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">2</span>Open PICkit 3 Programmer App
+                </div>
+                <ul>
+                    <li>Run PICkit 3 Programmer Application (not MPLAB X IPE)</li>
+                    <li>Select the correct PIC18 device in the device drop-down</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">3</span>Check Communication
+                </div>
+                <ul>
+                    <li>Click on <span class="highlight">Tools > Check Communication</span></li>
+                    <li>If successful, you will see <span class="success">PICkit 3 Connected</span> and voltage levels</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">4</span>Install OS Firmware (only if required)
+                </div>
+                <p>If the PICkit 3 says <span class="error">OS Not Found</span> or <span class="error">No Device Connected</span>, it may require an OS.</p>
+                <ul>
+                    <li>Go to: <div class="code-path">C:\Program Files (x86)\Microchip\PICkit 3 v3.xx\PK3OSV020005.hex</div></li>
+                    <li>Use <span class="highlight">File > Import Hex</span> and flash this firmware to PICkit 3</li>
+                    <li>(Only required once or when switching back from MPLAB X)</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">5</span>Load the HEX file
+                </div>
+                <ul>
+                    <li>Click <span class="highlight">File > Import Hex</span></li>
+                    <li>Select your .hex file from the build output directory</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">6</span>Program the Device
+                </div>
+                <ul>
+                    <li>Click <span class="highlight">Write</span> to program the PIC18</li>
+                    <li>It will erase, write, and verify the firmware</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="case-section">
+        <div class="case-title">
+            <span class="icon">✅</span> CASE 2: Programming dsPIC33 Using MPLAB X IDE (v6.20 or later)
+        </div>
+        
+        <p>Newer devices like dsPIC33CK, dsPIC33EP, etc. are supported only in MPLAB X IDE with MPLAB X IPE and MPLAB X Programmer.</p>
+        
+        <div class="warning">
+            But before programming dsPIC33, revert the PICkit 3 to be used with MPLAB X if you previously used it with Standalone Software.
+        </div>
+        
+        <div class="steps">
+            <h3><span class="icon">🔧</span> Step-by-Step for dsPIC33:</h3>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">1</span>Revert PICkit 3 for MPLAB X IDE use
+                </div>
+                <ul>
+                    <li>Open PICkit 3 Programmer Standalone</li>
+                    <li>Go to: <span class="highlight">Tools > Revert to MPLAB Mode</span></li>
+                    <li>It will reset the firmware of PICkit 3 for use with MPLAB X IDE</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">2</span>Create and Build Your Project
+                </div>
+                <ul>
+                    <li>Open MPLAB X IDE</li>
+                    <li>Create a new project for your specific dsPIC33 device</li>
+                    <li>Build the project using Ctrl + F11</li>
+                    <li>Ensure the .hex file is generated in the dist/.../production/ folder</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">3</span>Connect PICkit 3
+                </div>
+                <ul>
+                    <li>Connect the PICkit 3 to your PC and target board</li>
+                    <li>MPLAB X IDE will auto-detect the PICkit 3 and target device</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">4</span>Open MPLAB X IPE (Optional, for just flashing)
+                </div>
+                <p>You can either:</p>
+                <ul>
+                    <li>Use MPLAB X IDE > Run > Program Device, or</li>
+                    <li>Open MPLAB IPE (Integrated Programming Environment) for manual flashing</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">5</span>Program the Device
+                </div>
+                <p>In MPLAB X IDE:</p>
+                <ul>
+                    <li>Go to <span class="highlight">Run > Run Project</span> (or Program Device)</li>
+                    <li>It will connect to PICkit 3, erase, and write the firmware</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">6</span>Check Output
+                </div>
+                <p>You'll get status in the Output window:</p>
+                <ul>
+                    <li><span class="success">Programming...</span></li>
+                    <li><span class="success">Verifying...</span></li>
+                    <li><span class="success">Device Programmed Successfully</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="case-section">
+        <div class="case-title">
+            <span class="icon">📝</span> Summary Comparison Table
+        </div>
+        
+        <table class="summary-table">
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>PIC18 (via Standalone)</th>
+                    <th>dsPIC33 (via MPLAB X)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>IDE Version</strong></td>
+                    <td>MPLAB X (older), MPLAB 8</td>
+                    <td>MPLAB X v6.20+</td>
+                </tr>
+                <tr>
+                    <td><strong>Programming Tool</strong></td>
+                    <td>PICkit 3 Programmer App</td>
+                    <td>MPLAB X IDE / IPE</td>
+                </tr>
+                <tr>
+                    <td><strong>HEX Generation</strong></td>
+                    <td>Build project in MPLAB X</td>
+                    <td>Build project in MPLAB X</td>
+                </tr>
+                <tr>
+                    <td><strong>HEX Path</strong></td>
+                    <td>dist/.../production/</td>
+                    <td>dist/.../production/</td>
+                </tr>
+                <tr>
+                    <td><strong>Flash Tool</strong></td>
+                    <td>PICkit 3 Programmer v3.x</td>
+                    <td>MPLAB X IDE/IPE</td>
+                </tr>
+                <tr>
+                    <td><strong>Communication Check</strong></td>
+                    <td>Tools > Check Communication</td>
+                    <td>Auto in MPLAB X</td>
+                </tr>
+                <tr>
+                    <td><strong>OS Firmware</strong></td>
+                    <td>Manual from Program Files</td>
+                    <td>Auto-managed</td>
+                </tr>
+                <tr>
+                    <td><strong>Revert Mode Needed?</strong></td>
+                    <td>Yes, to MPLAB X before dsPIC</td>
+                    <td>Yes, to Standalone before PIC18</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="requirements">
+        <h3><span class="icon">💡</span> Important Notes:</h3>
+        <ul>
+            <li><strong>OS File Location:</strong> The PICkit 3 OS file is typically located at: <div class="code-path">C:\Program Files (x86)\Microchip\PICkit 3 v3.xx\PK3OSV020005.hex</div></li>
+            <li><strong>Loading OS File:</strong> Use Tools menu in PICkit 3 Standalone to download or update the OS firmware</li>
+            <li><strong>Communication Test:</strong> Always verify communication before programming using Tools > Check Communication</li>
+            <li><strong>Mode Switching:</strong> Remember to revert PICkit 3 mode when switching between device families</li>
+            <li><strong>Power Supply:</strong> Ensure proper power connections (VDD, GND) and consider using PICkit 3 power supply option</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>PIC18 and dsPIC33 Programming Guide | Generated for Professional Use</p>
+        <p>Always refer to the latest device datasheets and software documentation</p>
+    </div>
+</body>
+</html>
